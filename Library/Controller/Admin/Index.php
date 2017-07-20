@@ -7,23 +7,20 @@
 
 namespace Controller\Admin;
 
-use \Core\Template;
-use \Model\User;
-use \Model\Node;
+use Core\Response;
 use \Helper\Util;
 
-class Index extends AdminListener {
-    public function index() {
-    	global $user;
-    	
 
-	include Template::load('/admin/index');
+/**
+ * Class Index
+ * @Admin
+ * @Authorization
+ * @package Controller\Admin
+ */
+class Index
+{
+    public function index()
+    {
+        Response::redirect('admin/home');
     }
-
-    public function test() {
-        global $user;
-
-        include Template::load('/admin/test');
-    }
-
 }

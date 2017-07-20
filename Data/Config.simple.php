@@ -1,57 +1,33 @@
 <?php
 /**
- * KK SS-Panel
- * A simple Shadowsocks Panel
+ * KK-Framework
  * Author: kookxiang <r18@ikk.me>
  */
 
-if(!defined('ROOT_PATH'))
-	exit('This file could not be access directly.');
-
+if (!defined('ROOT_PATH')) {
+    exit('This file could not be access directly.');
+}
 
 /**
  * Site Name
+ * 网站名称
+ * 模板 LOGO 若是图制，则需自行修改图片
+ * 其余所有页面展示名称皆为此配置项内容
  */
 define('SITE_NAME', 'SS Cat');
-/**
- * Template Name
- */
-define('TEMPLATE_NAME', 'Default');
-define('TPL_PATH', 'Resource/'.TEMPLATE_NAME.'/');
 
 /**
- * Lockscreen service switch
+ * Theme setting:
+ *
  */
-define('LOCKSCREEN', true);
+define('THEME', 'Xenon');
 
 /**
- * Mailer config
+ * Resource url setting:
+ *
  */
-$MAIL = array(
-	'host' => 'smtp.exmail.qq.com',
-	'username' => 'h@loacg.com',
-	'password' => 'password',
-	'from'     => '某科学的h本 <h@loacg.com>',
-	'secure' => ''
-);
-
-/**
- * Flow default value
- */
-define('TRANSFER', 10);// Default flow 10GB
-/**
- * Encrypt Key:
- * This key is used to encrypt password and other information.
- * Don't touch it after application install finished.
- */
-define('ENCRYPT_KEY', 'Encrypt Key');
-
-/**
- * Cookie Key:
- * Password which used to encrypt cookie info.
- * If this key is leaked, generate it again and all the users will forced logout.
- */
-define('COOKIE_KEY', 'Cookie Key');
+//define('RESOURCE', 'https://static-2.loacg.com/open/static/sspanel');
+define('RESOURCE', 'Resource/'.THEME);
 
 /**
  * Rewrite setting:
@@ -60,22 +36,29 @@ define('COOKIE_KEY', 'Cookie Key');
 define('USE_REWRITE', true);
 
 /**
+ * Encrypt Key:
+ * This key is used to encrypt password and other information.
+ * Don't touch it after application install finished.
+ */
+define('ENCRYPT_KEY', 'Please generate key and paste here');
+define('COOKIE_KEY', 'Please generate key and paste here');
+
+/**
  * HTTPS support:
  * Use HTTPS connection when necessary, needs to config apache/nginx manually
  */
-define('HTTPS_SUPPORT', false);
+define('HTTPS_SUPPORT', true);
 
 /**
  * Enable debug mode:
  * Disable debug mode will hide backtrace information, which is helpful for developer
  */
-define('DEBUG_ENABLE', true);
+define('DEBUG_ENABLE', false);
 
 /**
- * Check template and resource file update automatically
- * You can turn off this on production environment.
+ * Logger:
  */
-define('TEMPLATE_UPDATE', true);
+define('LOG_LEVEL', 4);
 
 /**
  * Base URL:
@@ -87,5 +70,14 @@ Core\Request::autoDetectBaseURL();
 
 /**
  * Database Connection:
+ * 请修改此处配置：
+ *  dbname 数据库名称
+ *  host   数据库连接IP地址
+ *  最后两项  root  password 替换成你的数据库 用户 与 密码
  */
-Core\Database::register('mysql:dbname=sspanel;host=localhost;charset=UTF8', 'user', 'password');
+Core\Database::initialize('mysql:dbname=sspanel;host=localhost;port=3306;charset=UTF8', 'root', 'password');
+
+/**
+ * Session
+ */
+@session_start();

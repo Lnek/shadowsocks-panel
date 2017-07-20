@@ -6,19 +6,39 @@
  */
 namespace Controller;
 
+use Core\Response;
 use Core\Template;
+use Model\User;
 
-class Support {
-    public function index() {
+/**
+ * Class Support
+ * @package Controller
+ */
+class Support
+{
+    public function index()
+    {
         exit();
     }
 
-    public function Tos() {
-        include Template::load('/home/Tos');
+    /**
+     * 工单系统
+     * @Authorization
+     */
+    public function ticket()
+    {
+        Template::putContext('user', User::getCurrent());
+        Template::setView('panel/ticket');
     }
 
-    public function Help() {
-        include Template::load('/home/help');
+    public function tos()
+    {
+        Template::setView('panel/Tos');
+    }
+
+    public function help()
+    {
+        Response::redirect("http://www.ishadowsocks.org/");
     }
 
 }
